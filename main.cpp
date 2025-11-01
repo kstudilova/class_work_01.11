@@ -28,8 +28,27 @@ int ** create(size_t rows, size_t cols)
     return mtx;
 }
 
+void construct(int ** mtx, int init, size_t rows, size_t cols)
+{
+    for (size_t i = 0; i < rows; ++i)
+    {
+        for (size_t j = 0; j < cols; ++j)
+        {
+            mtx[i][j] = init;
+        }
+    }
+}
+
 int main()
 {
+    size_t r = 0, c = 0;
+    std::cin >> r >> c; //возвращает булевую переменнную, которая принимает значение false при некорректном вводе
+    if (!std::cin) //если не гуд
+    {
+        std::cerr << "Incorrect input\n";
+        return 2;
+    }
+
     int ** matrix = nullptr;
     try
     {
@@ -40,5 +59,8 @@ int main()
         std::cerr << e.what() << '\n';
         return 1;
     }
+    std::cout << "created!\n";
+    construct(matrix, 2, r, c);
+    std::cout << matrix[0][0] << "\n"; //UB?
     destroy(matrix, 5);
 }
