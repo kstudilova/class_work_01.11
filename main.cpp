@@ -50,7 +50,24 @@ void input(int ** mtx, size_t rows, size_t cols)
     }
 }
 
-void output(int ** mtx, const size_t * lns, size_t rows)
+void output(int ** mtx, size_t rows, size_t cols) //вывод прямоугольной матрицы
+{
+    for (size_t i = 0; i < rows; ++i)
+    {
+        if (cols == 0) {
+            std::cout << "\n";
+            continue;
+        }
+        std::cout << ' ' << mtx[i][0];
+        for (size_t j = 1; j < cols; ++j)
+        {
+            std::cout << " " << mtx[i][j];
+        }
+        std::cout << "\n";
+    }
+}
+
+void output(int ** mtx, const size_t * lns, size_t rows) //вывод разнодлинной матрицы
 {
     for (size_t i = 0; i < rows; ++i)
     {
@@ -138,11 +155,7 @@ int main()
         destroy(mat, rows);     
     } catch (const std::exception& e) {
         std::cerr << e.what() << '\n';
-        delete[] one_dim_array;
-        delete[] lns;
-        return 3;
+        return 1;
     }
-
-    delete[] one_dim_array;
-    delete[] lns;
+    return 0;
 }
